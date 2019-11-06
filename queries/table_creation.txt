@@ -1,0 +1,12 @@
+USE ajf0031db;
+CREATE TABLE book (
+	BookID int NOT NULL,
+	Title varchar(255),
+	UnitPrice decimal(9,2),
+	Author varchar(255),
+	Quantity int,
+	SupplierID int,
+	SubjectID int,
+	PRIMARY KEY (BookID)
+);
+	
