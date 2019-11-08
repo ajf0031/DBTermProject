@@ -1,4 +1,18 @@
-USE ajf0031db;
+CREATE TABLE subject (
+	SubjectID int NOT NULL,
+	CategoryName varchar(255),
+	PRIMARY KEY (SubjectID)
+);
+
+CREATE TABLE supplier (
+	SupplierID int NOT NULL,
+	CompanyName varchar(255),
+	ContactLastName varchar(255),
+	ContactFirstName varchar(255),
+	Phone char(10),
+	PRIMARY KEY (SupplierID)
+);
+
 CREATE TABLE book (
 	BookID int NOT NULL,
 	Title varchar(255),
@@ -7,6 +21,7 @@ CREATE TABLE book (
 	Quantity int,
 	SupplierID int,
 	SubjectID int,
-	PRIMARY KEY (BookID)
+	PRIMARY KEY (BookID),
+	FOREIGN KEY (SubjectID) REFERENCES subject(SubjectID)
 );
 	

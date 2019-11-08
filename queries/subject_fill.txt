@@ -1,0 +1,5 @@
+INSERT INTO subject VALUES(1, 'category1');
+INSERT INTO subject VALUES(2, 'category2');
+INSERT INTO subject VALUES(3, 'category3');
+INSERT INTO subject VALUES(4, 'category4');
+INSERT INTO subject VALUES(5, 'category5');
