@@ -12,6 +12,8 @@ if ($result->num_rows > 0) {
 		echo " Author: " . $row["Author"] . " Quantity: " . $row["Quantity"];
 		echo " SupplierID: " . $row["SupplierID"] . " SubjectID: " . $row["SubjectID"] . "<br>";
 	}
+} else {
+	echo "0 results";
 }
 
 CloseCon($conn);
