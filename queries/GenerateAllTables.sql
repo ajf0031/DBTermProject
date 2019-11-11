@@ -1,5 +1,5 @@
 /*creates all empty tables for term project db */
-
+/*TODO add foreign keys*/
 CREATE TABLE book (
 	BookID int NOT NULL,
 	Title varchar(255),
@@ -14,10 +14,10 @@ CREATE TABLE book (
 CREATE TABLE subject (
     SubjectID int NOT NULL,
     CatagoryName varchar(255),
-    PRIMARY KEY SubjectID
+    PRIMARY KEY (SubjectID)
 );
 
-CREATE TABLE customer(
+CREATE TABLE customer (
     CustomerID int NOT NULL,
     LastName varchar(255),
     FirstName varchar(255),
@@ -32,13 +32,13 @@ CREATE TABLE employee (
     PRIMARY KEY (EmployeeID)
 );
 
-CREATE TABLE order (
+CREATE TABLE orders (
     OrderID int NOT NULL,
     CustomerID int NOT NULL,
     EmployeeID int NOT NULL,
-    OrderDate DATE,
-    ShippedDate DATE,
-    ShipperID int,
+    OrderDate varchar(8),
+    ShippedDate varchar(8),
+    ShipperID int NOT NULL,
     PRIMARY KEY (OrderID)
 );
 
@@ -48,7 +48,7 @@ CREATE TABLE order_details (
     Quantity int NOT NULL
 );
 
-CREATE TABLE Shipper (
+CREATE TABLE shipper (
     ShipperID int NOT NULL,
     ShipperName varchar(255),
     PRIMARY KEY (ShipperID)
@@ -59,6 +59,6 @@ CREATE TABLE supplier (
     CompanyName varchar(255),
     ContactLastName varchar(255),
     ContactFirstName varchar(255),
-    Phone varchar(12)
+    Phone varchar(12),
     PRIMARY KEY (SupplierID)
 );
