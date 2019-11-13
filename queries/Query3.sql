@@ -1,5 +1,5 @@
-/*query 3*/		
-SELECT Title
+/*query 3*/
+SELECT DISTINCT Title
 From book as books, orders, order_details as details, customer
 Where customer.LastName = 'lastname1' 
 		AND customer.FirstName = 'firstname1'
