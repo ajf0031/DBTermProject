@@ -13,7 +13,7 @@ CREATE TABLE book (
 
 CREATE TABLE subject (
     SubjectID int NOT NULL,
-    CatagoryName varchar(255),
+    CategoryName varchar(255),
     PRIMARY KEY (SubjectID)
 );
 
@@ -38,7 +38,7 @@ CREATE TABLE orders (
     EmployeeID int NOT NULL,
     OrderDate varchar(8),
     ShippedDate varchar(8),
-    ShipperID int NOT NULL,
+    ShipperID int,
     PRIMARY KEY (OrderID)
 );
 

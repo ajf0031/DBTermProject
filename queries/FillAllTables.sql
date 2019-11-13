@@ -7,17 +7,17 @@ INSERT INTO book VALUES(6,'book6',12.34,'author6',30,1,3);
 INSERT INTO book VALUES(7,'book7',56.90,'author2',17,3,4);
 INSERT INTO book VALUES(8,'book8',33.44,'author7',2,1,3);
 
-INSERT INTO customer VALUES(1,'lastname1','firstname1',334-001-001);
-INSERT INTO customer VALUES(2,'lastname2','firstname2',334-002-002);
-INSERT INTO customer VALUES(3,'lastname3','firstname3',334-003-003);
-INSERT INTO customer VALUES(4,'lastname4','firstname4',334-004-004);
+INSERT INTO customer VALUES(1,'lastname1','firstname1','334-001-001');
+INSERT INTO customer VALUES(2,'lastname2','firstname2','334-002-002');
+INSERT INTO customer VALUES(3,'lastname3','firstname3','334-003-003');
+INSERT INTO customer VALUES(4,'lastname4','firstname4','334-004-004');
 
 INSERT INTO employee VALUES(1,'lastname5','firstname5');
 INSERT INTO employee VALUES(2,'lastname6','firstname6');
 INSERT INTO employee VALUES(3,'lastname6','firstname9');
 
-INSERT INTO orders VALUES(1,1,1,8/1/2016,8/3/2016,1);
-INSERT INTO orders VALUES(2,1,2,8/4/2016,NULL,NULL);
+INSERT INTO orders VALUES(1,1,1,'8/1/2016','8/3/2016',1);
+INSERT INTO orders VALUES(2,1,2,'8/4/2016',NULL,NULL);
 INSERT INTO orders VALUES(3,2,1,'8/1/2016','8/4/2016',2);
 INSERT INTO orders VALUES(4,4,2,'8/4/2016','8/4/2016',1);
 INSERT INTO orders VALUES(5,1,1,'8/4/2016','8/5/2016',1);
