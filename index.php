@@ -18,13 +18,14 @@ body {font-family: Arial;}
 }
 
 .space {
+	float: left;
 	width: 10%;
 }
 
 .row:after {
 	content: "";
 	display: table;
-	clear: both;
+	clear: block;
 }
 
 /* Style the tab */
@@ -147,8 +148,14 @@ body {font-family: Arial;}
 			</table>
 		</div>
 	</div>
-	<div class="space"></div>
-	<div class="column"></div>
+	<div class="space">&nbsp</div>
+	<div class="column">
+		<form action="index.php" method="post">
+			<h2>Query</h2>
+			<input type="text" name="query"><br>
+			<input type="submit">
+		</form>
+	</div>
 </div>
 
 
