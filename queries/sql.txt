@@ -1,0 +1,10 @@
+SELECT CategoryName FROM book, subject WHERE SupplierID = 2 AND book.SubjectID = subject.SubjectID;
+SELECT Title, UnitPrice FROM book WHERE (SELECT MAX(UnitPrice) FROM book WHERE supplierID = 3) = UnitPrice;
+SELECT DISTINCT Title From book as books, orders, order_details as details, customer Where customer.LastName = 'lastname1' AND customer.FirstName = 'firstname1' AND customer.CustomerID = orders.CustomerID AND orders.OrderID = details.OrderID AND details.bookID = books.bookID;
+Select Title From book Where Quantity > 10;
+Select Sum(UnitPrice * details.Quantity) From book as books, orders, order_details as details, customer where customer.LastName = 'lastname1' AND customer.FirstName = 'firstname1' AND customer.OrderID = orders.OrderId AND details.bookID = books.bookID;
+----------------QUERY 6-----------------------------------------
+Select Title From book Where SupplierID =2
+----------------Query 8-----------------------------------------
+Select Title, ShipperName From orders, shipper, book, order_details Where ShippedDate = "8/4/2016" AND orders.ShipperID = shipper.ShipperID AND orders.OrderID = order_details.OrderID AND order_details.BookID = book.BookID
+----------------Querys 10-18------------------------------------
