@@ -3,12 +3,24 @@ include 'db_connection.php';
 include 'table_builder.php';
 
 $conn = OpenCon();
+
+$query = NULL;
+$result = NULL;
+$error = NULL;
+
+if(isset($_POST["query"])) {
+	$query = $_POST["query"];			
+	if(!$result = $conn->query($query)) {
+		$error = $conn->error;
+	}
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online Bookstore</title>
 <style>
 body {font-family: Arial;}
 
@@ -68,20 +80,20 @@ body {font-family: Arial;}
 </head>
 <body>
 
+
 <div class="row">
 	<div class="column">
-		<h2>Tabs</h2>
-		<p>Click on the buttons inside the tabbed menu:</p>
+		<h2>Database</h2>
 		
 		<div class="tab">
-		  <button class="tablinks" onclick="openCity(event, 'Book')">Book</button>
-		  <button class="tablinks" onclick="openCity(event, 'Customer')">Customer</button>
-		  <button class="tablinks" onclick="openCity(event, 'Employee')">Employee</button>
-		  <button class="tablinks" onclick="openCity(event, 'Order Details')">Order Details</button>
-		  <button class="tablinks" onclick="openCity(event, 'Orders')">Orders</button>
-		  <button class="tablinks" onclick="openCity(event, 'Shipper')">Shipper</button>
-		  <button class="tablinks" onclick="openCity(event, 'Subject')">Subject</button>
-		  <button class="tablinks" onclick="openCity(event, 'Supplier')">Supplier</button>
+		  <button class="tablinks" onclick="openTab(event, 'Book','BookButton')" id="BookButton">Book</button>
+		  <button class="tablinks" onclick="openTab(event, 'Customer','CustomerButton')"id="CustomerButton">Customer</button>
+		  <button class="tablinks" onclick="openTab(event, 'Employee','EmployeeButton')"id="EmployeeButton">Employee</button>
+		  <button class="tablinks" onclick="openTab(event, 'Order Details','OrderDetailsButton')"id="OrderDetailsButton">Order Details</button>
+		  <button class="tablinks" onclick="openTab(event, 'Orders','OrdersButton')"id="OrdersButton">Orders</button>
+		  <button class="tablinks" onclick="openTab(event, 'Shipper','ShipperButton')"id="ShipperButton">Shipper</button>
+		  <button class="tablinks" onclick="openTab(event, 'Subject','SubjectButton')"id="SubjectButton">Subject</button>
+		  <button class="tablinks" onclick="openTab(event, 'Supplier','SupplierButton')"id="SupplierButton">Supplier</button>
 		</div>
 		
 		<div id="Book" class="tabcontent">
@@ -152,27 +164,47 @@ body {font-family: Arial;}
 	<div class="column">
 		<form action="index.php" method="post">
 			<h2>Query</h2>
-			<input type="text" name="query"><br>
+			<textarea name="query" rows="15" style="width:80%;" placeholder="Query..."></textarea>
+			<input type="hidden" name= "tabState" id="tabState" value=<?php
+				if (isset($_POST["tabState"])) {
+					echo $_POST["tabState"];
+				} else {
+					echo "BookButton";
+				}
+			?>>
+			<br>
 			<input type="submit">
 		</form>
+		<h1>	
+		<?php
+			if(!is_null($error)) {
+				echo $error;
+			}
+		?>
+		</h1>
 	</div>
 </div>
 
 
 <script>
-function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
+function openTab(evt, tabName, id) {
+	var i, tabcontent, tablinks;
+	tabcontent = document.getElementsByClassName("tabcontent");
+	for (i = 0; i < tabcontent.length; i++) {
+	  tabcontent[i].style.display = "none";
+	}
+	tablinks = document.getElementsByClassName("tablinks");
+	for (i = 0; i < tablinks.length; i++) {
+	  tablinks[i].className = tablinks[i].className.replace(" active", "");
+	}
+	document.getElementById(tabName).style.display = "block";
+	evt.currentTarget.className += " active";
+	
+	document.getElementById("tabState").value = id;
 }
+
+document.getElementById(document.getElementById("tabState").value).click();
+
 </script>
    
 </body>
