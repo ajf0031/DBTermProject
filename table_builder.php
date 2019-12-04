@@ -1,30 +1,51 @@
 <?php
 
-function BuildTable($conn, $table_name) {
-	$attr_query = "SHOW columns FROM " . $table_name;
-	$attr_result = $conn->query($attr_query);	
-	$data_query = "SELECT * FROM " . $table_name;	
-	$data_result = $conn->query($data_query);	
+function buildTabs($conn) {
+	$table_query = "SHOW TABLES;";
+	$db_tables = $conn->query($table_query); 
+	$names = array();
+	while($row = $db_tables->fetch_array()) {
+		array_push($names, $row[0]);
+	}
+	echo "<div class=\"tab\">";
+		foreach ($names as $name) {
+			echo "<button class=\"tablinks\" onclick=\"openTab(event, '" . $name . "')\" id=\"" . $name . "Button" . "\">" . $name . "</button>";
+		}
+	echo "</div>";
 
-	$attr_names = array();
+	foreach ($names as $name) {
+		echo "<div id=\"" . $name . "\" class=\"tabcontent\">";
+		echo "\t<table class=\"table table-bordered table-striped\">";
 
-	if ($data_result->num_rows > 0) {
+		$data_query = "SELECT * FROM " . $name . ";";	
+		$data_result = $conn->query($data_query);	
+		echo buildTableFromResult($data_result);
+
+		echo "\t</table>";
+		echo "</div>";
+	}
+}
+
+function buildTableFromResult($result) {
+	$fields = $result->fetch_fields();
+	echo "<table class=\"table table-bordered table-striped\">";
+		echo "<thead class=\"thead-light\">";
 		echo "<tr>";
-			while($row = $attr_result->fetch_assoc()) {
-				echo "<th>". $row["Field"] . "</th>";
-				array_push($attr_names, $row["Field"]);
+			foreach($fields as $field) {
+				echo "<th>" . $field->name . "</th>";
 			}
 		echo "</tr>";
-			while($row = $data_result->fetch_assoc()) {
+		echo "</thead>";
+		echo "<tbody>";
+			while($row = $result->fetch_assoc()) {
 				echo "<tr>";
-				foreach($attr_names as $name) {
-					echo "<td>" . $row[$name] . "</td>";
+				foreach($fields as $field) {
+					echo "<td>" . $row[$field->name] . "</td>";
 				}
 				echo "</tr>";
 			}
-	} else {
-		echo "Book Table Empty<br>";
-	}	
+		echo "</tbody>";
+	echo "</table>";
 }
 
 ?>
