@@ -1,5 +1,5 @@
 /*query 1
 -- Works*/
 SELECT CategoryName
-FROM book, subject
-WHERE SupplierID = 2 AND book.SubjectID = subject.SubjectID;
+FROM db_book, db_subject
+WHERE SupplierID = 2 AND db_book.SubjectID = db_subject.SubjectID;
