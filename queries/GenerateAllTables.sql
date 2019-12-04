@@ -35,7 +35,7 @@ CREATE TABLE db_order (
     OrderID int,
     CustomerID int REFERENCES db_customer.CustomerID,
     EmployeeID int REFERENCES db_employee.EmployeeID,
-    OrderDate varchar(10),
+    OrderDate DATE,
     ShippedDate varchar(10),
     ShipperID int REFERENCES db_shipper.ShipperID,
     PRIMARY KEY (OrderID)

@@ -16,13 +16,13 @@ INSERT INTO db_employee VALUES(1,'lastname5','firstname5');
 INSERT INTO db_employee VALUES(2,'lastname6','firstname6');
 INSERT INTO db_employee VALUES(3,'lastname6','firstname9');
 
-INSERT INTO db_order VALUES(1,1,1,'8/1/2016','8/3/2016',1);
-INSERT INTO db_order VALUES(2,1,2,'8/4/2016',NULL,NULL);
-INSERT INTO db_order VALUES(3,2,1,'8/1/2016','8/4/2016',2);
-INSERT INTO db_order VALUES(4,4,2,'8/4/2016','8/4/2016',1);
-INSERT INTO db_order VALUES(5,1,1,'8/4/2016','8/5/2016',1);
-INSERT INTO db_order VALUES(6,4,2,'8/4/2016','8/5/2016',1);
-INSERT INTO db_order VALUES(7,3,1,'8/4/2016','8/4/2016',1);
+INSERT INTO db_order VALUES(1,1,1,'2016-8-1','2016-8-3',1);
+INSERT INTO db_order VALUES(2,1,2,'2016-8-4',NULL,NULL);
+INSERT INTO db_order VALUES(3,2,1,'2016-8-1','2016-8-4',2);
+INSERT INTO db_order VALUES(4,4,2,'2016-8-4','2016-8-4',1);
+INSERT INTO db_order VALUES(5,1,1,'2016-8-4','2016-8-5',1);
+INSERT INTO db_order VALUES(6,4,2,'2016-8-4','2016-8-5',1);
+INSERT INTO db_order VALUES(7,3,1,'2016-8-4','2016-8-4',1);
 
 INSERT INTO db_order_details VALUES(1,1,2);
 INSERT INTO db_order_details VALUES(4,1,1);
