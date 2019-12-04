@@ -1,4 +1,4 @@
 /*query 4*/												  
 Select Title 
-From book
+From db_book
 Where Quantity > 10;

@@ -1,3 +1,3 @@
 Select Title
-From book
+From db_book
 Where SupplierID =2
