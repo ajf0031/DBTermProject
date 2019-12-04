@@ -1,10 +1,19 @@
-SELECT CategoryName FROM book, subject WHERE SupplierID = 2 AND book.SubjectID = subject.SubjectID;
-SELECT Title, UnitPrice FROM book WHERE (SELECT MAX(UnitPrice) FROM book WHERE supplierID = 3) = UnitPrice;
-SELECT DISTINCT Title From book as books, orders, order_details as details, customer Where customer.LastName = 'lastname1' AND customer.FirstName = 'firstname1' AND customer.CustomerID = orders.CustomerID AND orders.OrderID = details.OrderID AND details.bookID = books.bookID;
-Select Title From book Where Quantity > 10;
-Select Sum(UnitPrice * details.Quantity) From book as books, orders, order_details as details, customer where customer.LastName = 'lastname1' AND customer.FirstName = 'firstname1' AND customer.OrderID = orders.OrderId AND details.bookID = books.bookID;
-----------------QUERY 6-----------------------------------------
-Select Title From book Where SupplierID =2
-----------------Query 8-----------------------------------------
-Select Title, ShipperName From orders, shipper, book, order_details Where ShippedDate = "8/4/2016" AND orders.ShipperID = shipper.ShipperID AND orders.OrderID = order_details.OrderID AND order_details.BookID = book.BookID
-----------------Querys 10-18------------------------------------
+Select CategoryName FROM db_book, db_subject WHERE SupplierID = 2 AND db_book.SubjectID = db_subject.SubjectID;
+Select Title, UnitPrice FROM db_book WHERE (SELECT MAX(UnitPrice) FROM db_book WHERE supplierID = 3) = UnitPrice;
+Select DISTINCT Title From db_book, db_order, db_order_details as details, db_customer Where db_customer.LastName = 'lastname1' AND db_customer.FirstName = 'firstname1' AND db_customer.CustomerID = db_order.CustomerID AND db_order.OrderID = details.OrderID AND details.BookID = db_book.BookID;
+Select Title From db_book Where Quantity > 10;
+Select Sum(UnitPrice * details.Quantity) From db_book, db_order, db_order_details as details, db_customer where db_customer.LastName = 'lastname1' AND db_customer.FirstName = 'firstname1' AND db_customer.CustomerID = db_order.CustomerID AND details.OrderID = db_order.OrderID AND details.BookID = db_book.bookID;
+Select FirstName, LastName From db_customer, (Select Sum(orderPrice) as customerPrice, CustomerID From (Select Sum(UnitPrice * details.Quantity) as orderPrice, db_order.OrderID From db_book, db_order, db_order_details as details, db_customer Where db_customer.CustomerID = db_order.CustomerID AND db_order.OrderID = details.OrderID AND details.BookID = db_book.BookID Group by OrderID ORDER BY OrderID) as OC Inner Join db_order On db_order.OrderID = OC.OrderID Group By CustomerID Having customerPrice < 80) as Q1 Where Q1.CustomerID = db_customer.CustomerID
+Select Title From db_book Where SupplierID =2
+Select SUM(UnitPrice * OD.Quantity), FirstName, LastName FROM db_book AS B, db_order AS O, db_order_details AS OD, db_customer AS C WHERE B.BookID = OD.BookID AND OD.OrderID = O.OrderID AND C.CustomerID = O.CustomerID GROUP BY O.CustomerID ORDER BY SUM(UnitPrice * OD.Quantity) DESC;
+--------------Query 9--------------
+SELECT DISTINCT C1.Title From db_book, db_order, db_order_details as details, db_customer, (SELECT DISTINCT Title From db_book, db_order, db_order_details as details, db_customer Where db_customer.LastName = 'lastname1' AND db_customer.FirstName = 'firstname1' AND db_customer.CustomerID = db_order.CustomerID AND db_order.OrderID = details.OrderID AND details.BookID = db_book.BookID) as C1, (SELECT DISTINCT Title From db_book, db_order, db_order_details as details, db_customer Where db_customer.LastName = 'lastname4' AND db_customer.FirstName = 'firstname4' AND db_customer.CustomerID = db_order.CustomerID AND db_order.OrderID = details.OrderID AND details.BookID = db_book.BookID) as C2 Where C1.Title = C2.Title;
+Select Title From db_book, db_employee, db_order, db_order_details Where db_employee.LastName = 'lastname6' And db_employee.FirstName = 'firstname6' And db_employee.EmployeeID = db_order.EmployeeID And db_order_details.OrderID = db_order.OrderID And db_order_details.BookID = db_book.BookID
+Select db_book.Title, Sum(db_order_details.quantity) From db_book, db_order_details Where db_order_details.BookID = db_book.BookID Group By db_order_details.BookID
+SELECT C.LastName, C.FirstName FROM db_customer AS C, db_order AS O, db_order_details AS OD WHERE C.CustomerID = O.CustomerID AND OD.OrderID = O.OrderID GROUP BY C.CustomerID HAVING SUM(OD.Quantity) >= 2;
+SELECT C.LastName, C.FirstName, B.Title FROM db_book AS B, db_customer AS C, db_order AS O, db_order_details AS OD, db_subject AS S WHERE C.CustomerID = O.CustomerID AND OD.OrderID = O.OrderID AND B.BookID = OD.BookID AND B.SubjectID = S.SubjectID AND (S.CategoryName = 'category3' OR S.CategoryName = 'category4') GROUP BY C.CustomerID;
+SELECT C.LastName, C.FirstName FROM db_book AS B, db_customer AS C, db_order AS O, db_order_details as OD WHERE C.CustomerID = O.CustomerID AND OD.OrderID = O.OrderID AND B.BookID = OD.BookID AND B.Author = 'author1' GROUP BY C.CustomerID;
+SELECT E.LastName, E.FirstName, SUM(B.UnitPrice * OD.Quantity) AS Total_Sale_Price FROM db_employee AS E, db_order AS O, db_order_details AS OD, db_book AS B WHERE E.EmployeeID = O.EmployeeID AND OD.OrderID = O.OrderID AND B.BookID = OD.BookID GROUP BY E.EmployeeID;
+-------------Query 17------------
+SELECT C.LastName, C.FirstName, SUM(OD.Quantity) AS TotalQuantity FROM db_customer AS C, db_order AS O, db_order_details as OD WHERE C.CustomerID = O.CustomerID AND OD.OrderID = O.OrderID GROUP BY C.CustomerID HAVING SUM(OD.Quantity) > 1 ORDER BY TotalQuantity DESC;
+SELECT C.LastName, C.FirstName, C.Phone FROM db_customer as C, db_order as O, db_order_details AS OD WHERE C.CustomerID = O.CustomerID AND OD.OrderID = O.OrderID GROUP BY C.CustomerID HAVING SUM(OD.Quantity) > 3;

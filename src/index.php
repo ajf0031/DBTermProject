@@ -102,6 +102,7 @@ $first_tab = "db_bookButton";
 			<br>
 			<input type="submit" class="btn btn-success">
 		</form>
+		<h2>Results</h2>
 		<?php
 			if(!is_null($error)) {
 				echo "<div class=\"alert alert-danger\"><p class=\"text-danger\">" . $error . "</p></div>";
