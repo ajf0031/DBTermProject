@@ -42,9 +42,9 @@ CREATE TABLE db_order (
 );
 
 CREATE TABLE db_order_details (
-    BookID int REFERENCES db_book.BookID 
+    BookID int REFERENCES db_book.BookID, 
     OrderID int REFERENCES db_order.OrderID,
-    Quantity int NOT NULL
+    Quantity int NOT NULL,
     PRIMARY KEY (BookID, OrderID)
 );
 
