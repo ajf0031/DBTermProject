@@ -1,17 +1,17 @@
 SELECT DISTINCT C1.Title 
-From book as books, orders, order_details as details, customer,
+From db_book, db_order, db_order_details as details, db_customer,
         (SELECT DISTINCT Title
-         From book as books, orders, order_details as details, customer
-         Where customer.LastName = 'lastname1' 
-                AND customer.FirstName = 'firstname1'
-                AND customer.CustomerID = orders.CustomerID
-                AND orders.OrderID = details.OrderID
-                AND details.bookID = books.bookID) as C1,
+         From db_book, db_order, db_order_details as details, db_customer
+         Where db_customer.LastName = 'lastname1' 
+                AND db_customer.FirstName = 'firstname1'
+                AND db_customer.CustomerID = db_order.CustomerID
+                AND db_order.OrderID = details.OrderID
+                AND details.BookID = db_book.BookID) as C1,
         (SELECT DISTINCT Title
-         From book as books, orders, order_details as details, customer
-         Where customer.LastName = 'lastname4' 
-                AND customer.FirstName = 'firstname4'
-                AND customer.CustomerID = orders.CustomerID
-                AND orders.OrderID = details.OrderID
-                AND details.bookID = books.bookID) as C2
+         From db_book, db_order, db_order_details as details, db_customer
+         Where db_customer.LastName = 'lastname4' 
+                AND db_customer.FirstName = 'firstname4'
+                AND db_customer.CustomerID = db_order.CustomerID
+                AND db_order.OrderID = details.OrderID
+                AND details.BookID = db_book.BookID) as C2
 Where C1.Title = C2.Title;
